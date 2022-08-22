@@ -1,0 +1,55 @@
+Hello! Thank you for your consideration in reserecting TINA!
+
+Now dependent on how much time I have and my memory, I may have an SD card flashed and already to go.
+
+NOTE: IF YOU ARE NOT FAMILIAR ON HOW TO DO THE NEXT STEP HAVE SOMEONE DOUBLE CHECK YOUR WORK.
+      YOU CAN LOOSE ALL OF THE DATA ON YOUR COMPUTER AND YOUR OS IF YOU ARE NOT CAREFUL.
+If not, flash the newest version of raspbian/ubuntu for raspberry pi onto a micro-sd card using Balena-etcher and shove her into a pi.
+
+This should be all the code needed to bring TINA back.
+Note: all of the arduino libraries are necessary!
+
+Here is a run through of the files:
+./TINA
+    modified_dive_code [sub-folder]
+    debug [sub-folder]
+    arduino-libraries [sub-folder]
+    blob_detection_robocar.py [Main blob detection script for detecting the stanchions that we were using.]
+    robocar_decision.py [Would decide how the motors should engage based upon the output of the blob detection algorithm.]
+    send_to_motor.py [Sends the decision from robocar_decision.py to the ESP32]
+
+./TINA/modified-drive-code
+    modifies-drive-code.ino [The drive code to flash onto the ESP32]
+        (Helpful note, you need to make sure you select the correct board before flashing the ESP32.
+        By default it is set to an AtMega? and will not work properly, so if you love seeing walls of red text
+        this is what you want to do. Otherwise, find a guide or ask someone on the team and we will help you!)
+    serial_test_esp32.ino [Can ignore]
+
+./TINA/debug
+    /Serial_Test [Folder of various serial testing scripts]
+    camera.py [look through the camera!)
+    record_video.py [self explanitory]
+
+./arduino-libraries
+    [All of the source code for the arduino libraries that need to be installed for this to work.]
+
+What you will need for software:
+
+1. Ardunio IDE or Platform.io
+2. Python
+3. Some knowledge of Linux or a resident Linux evangelist by your side
+
+You will need the following hardware:
+
+1. SRT kit (you will be working with these again soon!)
+2. Raspberry Pi
+3. USB A to micro B cord
+4. USB A to USB Cable
+5. USB battery bank
+6. USB Camera
+7. Adhesive
+
+Once assembled, start by:
+1. Restarting the ESP32
+2. SSH into the pi `ssh [IP Address]`
+3. Run the send_to_motor.py script with `python3 send_to_motor.py`
