@@ -15,14 +15,7 @@ I edited the code from: https://www.tensorflow.org/tutorials/generative/style_tr
 # paintings folder
 style_img_name = "daVinci"
 
-# Filename of the image you took
-# Note: Make sure that it is in the SAME FOLDER
-# as the nst.py script!
-content_image = load_img("YOUR_IMAGE_HERE.png")
-
 #+---------------------------------------------+
-
-
 
 import tensorflow as tf
 import tensorflow_hub as hub
@@ -38,6 +31,7 @@ import numpy as np
 import PIL.Image
 import time
 import functools
+import sys
 
 def tensor_to_image(tensor):
   tensor = tensor*255
@@ -71,9 +65,15 @@ def load_img(path_to_img):
   img = img[tf.newaxis, :]
   return img
 
+# arguments check
+if (len(sys.argv) < 2):
+    print("Usage: " + sys.argv[0] + " [input image]")
+    exit()
+
 style_img_name = "daVinci"
 
-content_image = load_img("YOUR_IMAGE_HERE.png")
+file_name_in = sys.argv[1]
+content_image = load_img(file_name_in)
 style_image = load_img("paintings/" + style_img_name + ".jpg")
 
 hub_model = hub.load('https://tfhub.dev/google/magenta/arbitrary-image-stylization-v1-256/2')
